@@ -9,8 +9,6 @@ def index():
     return render_template('index.html')
 
 def clean_data(datanew):
-  
-
     # Realizar la limpieza de datos según tus instrucciones
     datanew = datanew.drop(columns=['CLIENTE', 'TELEF'])
     datanew = datanew.rename(columns={"RTM": "Emp"})
@@ -59,13 +57,13 @@ def clean_data(datanew):
             return '5'
     
     # Aplicar la función personalizada a la columna de observaciones para asignar el tipo de obra
-    datanew['TIPO_OBRA_NUM'] = datanew['OBSERVACIONES'].apply(asignar_tipo_obra)
+    datanew['tipodeobra'] = datanew['OBSERVACIONES'].apply(asignar_tipo_obra)
     datanew["MES"] = datanew["MES"].str.replace(",00", "").astype(int)
 
-      # Guardar la columna de direcciones en una variable antes de eliminarla
+    # Guardar la columna de direcciones en una variable antes de eliminarla
     directions = datanew['DIRECCIÓN'].copy()
 
-    datanew= datanew[["MES", "COMERCIAL_NUM", "TELEOP_NUM", "CANAL_NUM", "TIPO_OBRA_NUM"]]
+    datanew = datanew[["MES", "COMERCIAL_NUM", "TELEOP_NUM", "CANAL_NUM", "tipodeobra"]]
     
     # Devolver los datos limpios junto con las direcciones
     return datanew, directions
@@ -87,21 +85,40 @@ def upload():
     # Realizar las predicciones utilizando el modelo cargado
     predictions = model.predict(datanew)
 
-    # Crear una lista para almacenar los resultados
+    # Crear una lista de resultados
     results = []
 
     # Iterar sobre las predicciones y agregar los resultados a la lista
     for direction, prediction in zip(directions, predictions):
         if prediction == 1:
-            result_text = 'Se firma'
+            result_text = 'Sí'
         else:
-            result_text = 'No se firma'
+            result_text = 'No'
 
-        results.append((direction, result_text))
+        results.append({'direccion': direction, 'prediccion': result_text})
 
     # Renderizar la plantilla de resultados y pasar los resultados como parámetro
-    return render_template('index.html', predictions=results)
+    return render_template('results.html', results=results)
+
+
+
+@app.route('/export', methods=['POST'])
+def export():
+    # Obtener los datos de la predicción del formulario
+    predictions = request.form['predictions']
+
+    # Convertir los datos de la predicción de JSON a una lista de diccionarios
+    predictions = jsonify(predictions).json
+
+    # Crear un DataFrame a partir de los datos de la predicción
+    df = pd.DataFrame(predictions)
+
+    # Guardar el DataFrame como un archivo Excel
+    df.to_excel('prediccion.xlsx', index=False)
+
+    # Redirigir a la página de resultados
+    return render_template('results.html', predictions=(predictions), results=results)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
-

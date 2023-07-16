@@ -1,21 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Results</title>
+    <title>Predicciones</title>
+    
+    <style>
+        table {
+            width: 80%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <h1>Results</h1>
     <table>
         <tr>
             <th>Row</th>
-            <th>Prediction</th>
+            <th>Dirección:</th>
+            <th>¿Se firma?:</th>
         </tr>
-        {% for index, result in results %}
+        {% for result in results %}
         <tr>
             <td>{{ loop.index }}</td>
-            <td>{{ result }}</td>
+            <td>{{ result.direccion }}</td>
+            <td>{{ result.prediccion }}</td>
         </tr>
         {% endfor %}
     </table>
+
+    <br>
+
+    <form action="/" method="get">
+        <button type="submit">Back to Upload</button>
+    </form>
+
+    <br>
+
+ 
 </body>
 </html>
+
