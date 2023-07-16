@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Estimador de presupuestos</title>
+</head>
+<body>
+    <h1>Datos:</h1>
+    <p>Introduce los datos de tu presupuesto, estimaremos si se firmará o no:.</p>
+</body>
+</html>
+
+<!-- Fila de la primera calle -->
+<label for="calle_1">Calle:</label>
+<input type="text" id="calle_1" name="calle_1">
+<!-- Resto de los campos de la primera calle -->
+
+<!-- Fila de la segunda calle -->
+<label for="calle_2">Calle:</label>
+<input type="text" id="calle_2" name="calle_2">
+<!-- Resto de los campos de la segunda calle -->
+
+<!-- Fila de la tercera calle -->
+<label for="calle_3">Calle:</label>
+<input type="text" id="calle_3" name="calle_3">
+<!-- Resto de los campos de la tercera calle -->
+
+<!-- Repetir para las filas adicionales necesarias -->
+
+
+
+<form action="/predict" method="POST">
+    <label for="mes">Mes se pidió presupuesto:</label>
+    <select id="mes" name="mes"></select>
+    <select name="mes">
+        <option value="ENERO">ENERO</option>
+        <option value="FEBRERO">FEBRERO</option>
+        <option value="MARZO">MARZO</option>
+        <option value="ABRIL">ABRIL</option>
+        <option value="MAYO">MAYO</option>
+        <option value="JUNIO">JUNIO</option>
+        <option value="JULIO">JULIO</option>
+        <option value="AGOSTO">AGOSTO</option>
+        <option value="SEPTIEMBRE">SEPTIEMBRE</option>
+        <option value="OCTUBRE">OCTUBRE</option>
+        <option value="NOVIEMBRE">NOVIEMBRE</option>
+        <option value="DICIEMBRE">DICIEMBRE</option>
+      </select>
+      
+
+<form action="/predict" method="POST">
+    <label for="tipodeobra">Tipo de Obra:</label>
+    <select id="tipodeobra" name="tipodeobra">
+      <option value="GENERAL">GENERAL</option>
+      <option value="BAÑO Y COCINA">BAÑO Y COCINA</option>
+      <option value="BAÑO">BAÑO</option>
+      <option value="COCINA">COCINA</option>
+      <option value="OTROS">OTROS</option>
+    </select>
+  
+    <label for="canal">Canal:</label>
+    <select id="canal" name="canal">
+      <option value="FORMULARIO">FORMULARIO</option>
+      <option value="CHAT">CHAT</option>
+      <option value="TELEFONO">TELEFONO</option>
+      <option value="REFERENCIADO">REFERENCIADO</option>
+    </select>
+  
+    <label for="teleop_num">Teleop Num:</label>
+    <select id="teleop_num" name="teleop_num">
+      <option value="MA CARMEN">MA CARMEN</option>
+      <option value="MONICA CHAT">MONICA CHAT</option>
+      <option value="AMPARO">AMPARO</option>
+      <option value="TERESA">TERESA</option>
+    </select>
+  
+    <label for="comercial_num">Comercial Num:</label>
+    <select id="comercial_num" name="comercial_num">
+      <option value="MOISES">MOISES</option>
+      <option value="REBOLLEDO">REBOLLEDO</option>
+      <option value="JOSE PASCUAL">JOSE PASCUAL</option>
+      <option value="NICOLAS">NICOLAS</option>
+    </select>
+  
+    <input type="submit" value="Predecir">
+  </form>
+  
+  
+  

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Importar archivo CSV</title>
+</head>
+<body>
+    <h1>Importar archivo CSV</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" onchange="this.form.submit()">
+    </form>
+
+    {% if predictions %}
+    <h2>Resultados</h2>
+    <table>
+        <tr>
+            <th>Row</th>
+            <th>Prediction</th>
+        </tr>
+        {% for prediction in predictions %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ prediction }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

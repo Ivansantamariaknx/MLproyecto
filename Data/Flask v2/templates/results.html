@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+</head>
+<body>
+    <h1>Results</h1>
+    <table>
+        <tr>
+            <th>Row</th>
+            <th>Prediction</th>
+        </tr>
+        {% for index, result in results %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ result }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
