@@ -80,7 +80,7 @@ def upload():
     datanew, directions = clean_data(datanew)
 
     # Cargar el modelo
-    model = joblib.load('D:\Bootcamp\MLproyecto\Data\Flaskv2\my_model.pkl')
+    model = joblib.load('D:\Bootcamp\MLproyecto\Flaskv2\my_model.pkl')
 
     # Realizar las predicciones utilizando el modelo cargado
     predictions = model.predict(datanew)
